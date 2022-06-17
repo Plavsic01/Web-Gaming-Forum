@@ -24,9 +24,6 @@ export default{
         })
     }
     },
-    methods:{
-        
-    },
     template:`
         <br>
         <h2 style="text-align:center">Kreiraj Pod-Forum</h2>

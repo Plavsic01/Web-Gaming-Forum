@@ -7,10 +7,9 @@ korisnik_privilegija_blueprint = Blueprint('korisnik_privilegija',__name__,url_p
 def dobavi_korisnik_privilegije():
     db = mysql.get_db()
     cursor = db.cursor()
-    if id is None:
-        cursor.execute("SELECT * FROM korisnik_privilegije;")
-        korisnici_privilegije = cursor.fetchall()
-        return jsonify(korisnici_privilegije),200
+    cursor.execute("SELECT * FROM korisnik_privilegije;")
+    korisnici_privilegije = cursor.fetchall()
+    return jsonify(korisnici_privilegije),200
 
 
 @korisnik_privilegija_blueprint.route('/<int:id>',methods=['GET'])
@@ -30,29 +29,33 @@ def kreiraj_korisnik_privilegiju():
     db = mysql.get_db()
     cursor = db.cursor()
     form_data = request.json
-    cursor.execute("INSERT INTO korisnik_privilegije (korisnik_id,privilegija_id) VALUES (%(korisnik_id)s,%(privilegija_id)s);",form_data)
-    db.commit()
-    return jsonify(None),201
-
+    try:
+        cursor.execute("INSERT INTO korisnik_privilegije (korisnik_id,privilegija_id) VALUES (%(korisnik_id)s,%(privilegija_id)s);",form_data)
+        db.commit()
+        return jsonify(None),201
+    except:
+        return jsonify(None),404
 
 @korisnik_privilegija_blueprint.route('/<int:id>',methods=['PUT'])
-def put(id):
+def izmeni_korisnik_privilegija(id):
     db = mysql.get_db()
     cursor = db.cursor()
     form_data = dict(request.json)
     form_data['id'] = id
-    modified = cursor.execute("UPDATE korisnik_privilegije SET korisnik_id = %(korisnik_id)s,privilegija_id = %(privilegija_id)s WHERE (id = %(id)s);",form_data)
-    db.commit()
-    if modified == 0:
+    try:
+        modified = cursor.execute("UPDATE korisnik_privilegije SET korisnik_id = %(korisnik_id)s,privilegija_id = %(privilegija_id)s WHERE (id = %(id)s);",form_data)
+        db.commit()
+        if modified == 0:
+            return jsonify(None),404
+        return jsonify(form_data),200
+    except:
         return jsonify(None),404
-    return jsonify(form_data),200
 
 
 @korisnik_privilegija_blueprint.route('/<int:id>',methods=['DELETE'])
-def delete(id):
+def obrisi_korisnik_privilegija(id):
     db = mysql.get_db()
     cursor = db.cursor()
-    # modified = cursor.execute("DELETE FROM korisnik_privilegije WHERE id = %s",(id,))
     data = {}
     data['obrisan'] = 1
     data['id'] = id

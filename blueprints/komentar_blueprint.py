@@ -80,7 +80,6 @@ def izmeni_komentar(komentar_id):
 def obrisi_komentar(komentar_id):
     db = mysql.get_db()
     cursor = db.cursor()
-    # modified = cursor.execute("DELETE FROM komentar WHERE komentar_id = %s",(komentar_id,))
     data = {}
     data['obrisan'] = 1
     data['komentar_id'] = komentar_id

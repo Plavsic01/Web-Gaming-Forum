@@ -26,6 +26,12 @@ import formaKomentar from "./components/Komentar/formaKomentar.js";
 import generickaTabela from "./components/generickaTabela.js";
 import generickaForma from "./components/generickaForma.js";
 
+import prikazPrivilegija from "./components/Privilegija/prikazPrivilegija.js";
+import formaPrivilegija from "./components/Privilegija/formaPrivilegija.js";
+
+import prikazKorisnikPrivilegija from "./components/KorisnikPrivilegija/prikazKorisnikPrivilegija.js";
+import formaKorisnikPrivilegija from "./components/KorisnikPrivilegija/formaKorisnikPrivilegija.js";
+
 
 const routes = [
     {path:'/',component:pocetnaStranica,name:"pocetna_stranica"},
@@ -36,6 +42,10 @@ const routes = [
     {path:'/forma-objave',component:formaObjava},
     {path:'/forma-komentari',component:formaKomentar},
     {path:'/forma-podforumi',component:formaPodForum},
+    {path:'/forma-privilegija',component:formaPrivilegija},
+    {path:'/forma-korisnik-privilegija',component:formaKorisnikPrivilegija},
+    
+    
 
 
     {path:'/pod-forumi',component:prikazPodForum},
@@ -50,6 +60,8 @@ const routes = [
     {path:'/forma-tema/:id',component:formaTema,name:"forma_tema"},
     {path:'/forma-objava/:id',component:formaObjava,name:"forma_objava"},
     {path:'/forma-komentar/:id',component:formaKomentar,name:"forma_komentar"},
+    {path:'/forma-privilegija/:id',component:formaPrivilegija,name:"forma_privilegija"},
+    {path:'/forma-korisnik-privilegija/:id',component:formaKorisnikPrivilegija,name:"forma_korisnik_privilegija"},
     {path:'/pod-forum/:id',component:prikazTema,name:"prikaz_tema"},
     {path:'/tema/:id',component:prikazObjava,name:"prikaz_objava"},
     {path:'/objava/:id',component:prikazKomentar,name:"prikaz_komentar"},
@@ -100,6 +112,12 @@ app.component("prikaz-komentar",prikazKomentar);
 app.component("forma-komentar",formaKomentar);
 
 
+app.component("prikaz-privilegija",prikazPrivilegija);
+app.component("forma-privilegija",formaPrivilegija);
+
+
+app.component("prikaz-korisnik-privilegija",prikazKorisnikPrivilegija);
+app.component("forma-korisnik-privilegija",formaKorisnikPrivilegija);
 
 app.component("prikaz-trenutnog-korisnika",prikazTrenutnogKorisnika);
 

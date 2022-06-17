@@ -28,7 +28,6 @@ def registracija():
     korisnik = cursor.fetchone()
 
     cursor.execute("SELECT privilegija_id FROM privilegija WHERE tip_privilegije = %(tip_privilegije)s;",form_data)
-    # privilegija = dict(cursor.fetchone())
     privilegija = cursor.fetchone()
     
     if korisnik is None:

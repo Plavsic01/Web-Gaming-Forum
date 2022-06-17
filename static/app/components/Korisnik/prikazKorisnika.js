@@ -55,6 +55,8 @@ export default{
         <br>
         <div style="width:80%;margin:auto;">
         <genericka-tabela @action-event="onAction" v-bind:dozvoljeneIzmene="dozvoljeneIzmene" v-bind:dozvoljenaPrava="dozvoljenaPrava" v-bind:rows="korisnici" v-bind:decodedToken="decodedToken" v-bind:metadata="metadata"></genericka-tabela>
+        <prikaz-privilegija></prikaz-privilegija>
+        <prikaz-korisnik-privilegija></prikaz-korisnik-privilegija>
         </div>
     `
 }

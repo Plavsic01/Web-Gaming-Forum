@@ -1,3 +1,4 @@
+import errno
 from flaskext.mysql import MySQL
 import pymysql
 

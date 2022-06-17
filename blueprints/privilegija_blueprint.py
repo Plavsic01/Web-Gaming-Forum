@@ -56,7 +56,6 @@ def izmeni_privilegiju(privilegija_id):
 def obrisi_privilegiju(privilegija_id):
     db = mysql.get_db()
     cursor = db.cursor()
-    # modified = cursor.execute("DELETE FROM privilegija WHERE privilegija_id = %s",(privilegija_id,))
     data = {}
     data['obrisan'] = 1
     data['privilegija_id'] = privilegija_id

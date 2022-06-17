@@ -30,9 +30,10 @@ export default{
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <template v-for="prava in decodedToken.prava_pristupa">
-                    <li v-if="prava == 'administrator'">
-                    <router-link class="nav-link" to="/forma-korisnik">Korisnik</router-link>
-                      <router-link class="nav-link" to="/forma-podforumi">PodForumi</router-link>                      
+                    <li v-if="prava == 'administrator'">                    
+                      <li><router-link class="nav-link" to="/forma-privilegija">Privilegije</router-link></li>
+                      <li><router-link class="nav-link" to="/forma-korisnik-privilegija">Korisnici Privilegije</router-link></li>                     
+                      <router-link class="nav-link" to="/forma-podforumi">PodForumi</router-link> 
                     </li>
                   </template>
                   <li><router-link class="nav-link" to="/forma-teme">Teme</router-link></li>
