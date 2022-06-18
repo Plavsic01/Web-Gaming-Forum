@@ -7,12 +7,12 @@ export default{
             decodedToken:((localStorage.getItem('token')) ? JSON.parse(atob(localStorage.getItem('token').split(".")[1]))['sub']:null),
             metadata:{
                 columns:[
-                    {"key":"korisnik_id","title":"Korisnik Id","type":"text"},
-                    {"key":"privilegija_id","title":"Privilegija Id","type":"text"}
+                    {"key":"korisnik_id","title":"Korisnik Id","type":"number"},
+                    {"key":"privilegija_id","title":"Privilegija Id","type":"number"}
                 ],
                 edit_columns:[
-                    {"key":"korisnik_id","title":"Korisnik Id","type":"text"},
-                    {"key":"privilegija_id","title":"Privilegija Id","type":"text"}
+                    {"key":"korisnik_id","title":"Korisnik Id","type":"number"},
+                    {"key":"privilegija_id","title":"Privilegija Id","type":"number"}
                 ]
             }
         }
