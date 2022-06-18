@@ -42,6 +42,16 @@ export default{
                 </ul>
               </li>
 
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Pretraga
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><router-link class="nav-link" to="/pretraga-pod-forumi">Pod Forumi</router-link></li>
+                  <li><router-link class="nav-link" to="/pretraga-teme">Teme</router-link></li>
+                </ul>
+              </li>
+
             <template v-for="prava in decodedToken.prava_pristupa">
             <li class="nav-item" v-if="prava == 'administrator'">  
                 <router-link class="nav-link" to="/korisnici">Korisnici</router-link>
@@ -76,8 +86,6 @@ export default{
     </template>
         </div>
       </nav>
-
-
       
     `
 }

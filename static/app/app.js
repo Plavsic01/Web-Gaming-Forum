@@ -25,6 +25,7 @@ import formaKomentar from "./components/Komentar/formaKomentar.js";
 
 import generickaTabela from "./components/generickaTabela.js";
 import generickaForma from "./components/generickaForma.js";
+import pretragaForma from "./components/pretragaForma.js";
 
 import prikazPrivilegija from "./components/Privilegija/prikazPrivilegija.js";
 import formaPrivilegija from "./components/Privilegija/formaPrivilegija.js";
@@ -32,6 +33,8 @@ import formaPrivilegija from "./components/Privilegija/formaPrivilegija.js";
 import prikazKorisnikPrivilegija from "./components/KorisnikPrivilegija/prikazKorisnikPrivilegija.js";
 import formaKorisnikPrivilegija from "./components/KorisnikPrivilegija/formaKorisnikPrivilegija.js";
 
+import pretragaPodForum from "./components/PodForum/pretragaPodForum.js";
+import pretragaTema from "./components/Tema/pretragaTema.js";
 
 const routes = [
     {path:'/',component:pocetnaStranica,name:"pocetna_stranica"},
@@ -44,6 +47,8 @@ const routes = [
     {path:'/forma-podforumi',component:formaPodForum},
     {path:'/forma-privilegija',component:formaPrivilegija},
     {path:'/forma-korisnik-privilegija',component:formaKorisnikPrivilegija},
+    {path:'/pretraga-pod-forumi',component:pretragaPodForum},
+    {path:'/pretraga-teme',component:pretragaTema},
     
     
 
@@ -102,6 +107,7 @@ app.component("forma-podforum",formaPodForum);
 
 app.component("genericka-tabela",generickaTabela);
 app.component("genericka-forma",generickaForma);
+app.component("pretraga-forma",pretragaForma);
 
 
 app.component("prikaz-objava",prikazObjava);
@@ -114,6 +120,10 @@ app.component("forma-komentar",formaKomentar);
 
 app.component("prikaz-privilegija",prikazPrivilegija);
 app.component("forma-privilegija",formaPrivilegija);
+
+
+app.component("pretraga-pod-foum",pretragaPodForum);
+app.component("pretraga-tema",pretragaTema);
 
 
 app.component("prikaz-korisnik-privilegija",prikazKorisnikPrivilegija);

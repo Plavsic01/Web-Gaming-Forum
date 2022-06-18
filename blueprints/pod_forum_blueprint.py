@@ -12,8 +12,7 @@ def dobavi_pod_forume():
     db = mysql.get_db()
     cursor = db.cursor()
     cursor.execute("SELECT pod_forum.pod_forum_id,pod_forum.obrisan,korisnik.korisnik_id,korisnik.korisnicko_ime,pod_forum.datum_kreiranja,pod_forum.naslov FROM korisnik INNER JOIN pod_forum ON korisnik.korisnik_id = pod_forum.korisnik_id;")
-    pod_forumi = cursor.fetchall()
-    print(pod_forumi)
+    pod_forumi = cursor.fetchall() 
     return jsonify(pod_forumi),200
 
 
@@ -74,3 +73,45 @@ def obrisi_pod_forum(pod_forum_id):
         return jsonify(None), 404
 
     return jsonify(None), 200
+
+
+@pod_forum_blueprint.route('/pretraga',methods=["POST"])
+@jwt_required(locations=['headers'])
+def pretraga():
+    db = mysql.get_db()
+    cursor = db.cursor()
+
+    query_string = "SELECT pod_forum.pod_forum_id,pod_forum.obrisan,korisnik.korisnik_id,korisnik.korisnicko_ime,pod_forum.datum_kreiranja,pod_forum.naslov FROM korisnik INNER JOIN pod_forum ON korisnik.korisnik_id = pod_forum.korisnik_id"
+
+    pretraga = request.json
+    count = 0
+    for keys,values in pretraga.items():
+        if values != '':
+            if count == 0:
+                if keys == "datum_kreiranja_od":
+                    query_string += f" WHERE pod_forum.datum_kreiranja >= %({keys})s "
+                elif keys == "datum_kreiranja_do":
+                    query_string += f" WHERE pod_forum.datum_kreiranja <= %({keys})s "
+                else:
+                    query_string += f" WHERE {keys} LIKE '%%' %({keys})s '%%' "
+                
+            else:
+                if keys == "datum_kreiranja_do":
+                    query_string += f"AND pod_forum.datum_kreiranja <= %({keys})s "
+                elif keys == "datum_kreiranja_od":
+                    query_string += f"AND pod_forum.datum_kreiranja >= %({keys})s "
+                else:
+                    query_string += f"AND {keys} LIKE '%%' %({keys})s '%%' "
+            count+=1
+
+    cursor.execute(query_string,pretraga)
+    pod_forumi = cursor.fetchall()
+
+    vidljivi_pod_forumi = []
+
+    for pod_forum in pod_forumi:
+        if pod_forum['obrisan'] == 0:
+            vidljivi_pod_forumi.append(pod_forum)
+    
+
+    return jsonify(vidljivi_pod_forumi),201

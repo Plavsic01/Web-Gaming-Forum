@@ -84,3 +84,48 @@ def obrisi_temu(tema_id):
         return jsonify(None), 404
 
     return jsonify(None), 200
+
+
+@tema_blueprint.route('/pretraga',methods=["POST"])
+@jwt_required(locations=['headers'])
+def pretraga():
+    db = mysql.get_db()
+    cursor = db.cursor()
+
+    query_string = "SELECT tema.tema_id,tema.naslov,tema.datum_kreiranja,tema.obrisan,korisnik.korisnicko_ime,korisnik.korisnik_id,pod_forum.naslov FROM tema INNER JOIN korisnik ON tema.korisnik_id = korisnik.korisnik_id INNER JOIN pod_forum ON pod_forum.pod_forum_id = tema.pod_forum_id"
+
+    pretraga = request.json
+    count = 0
+    for keys,values in pretraga.items():
+        if values != '':
+            if count == 0:
+                if keys == "datum_kreiranja_od":
+                    query_string += f" WHERE tema.datum_kreiranja >= %({keys})s "
+                elif keys == "datum_kreiranja_do":
+                    query_string += f" WHERE tema.datum_kreiranja <= %({keys})s "
+                elif keys == "pod_forum_id":
+                    query_string += f" WHERE pod_forum.naslov LIKE '%%' %({keys})s '%%' "
+                else:
+                    query_string += f" WHERE {keys} LIKE '%%' %({keys})s '%%' "
+                
+            else:
+                if keys == "datum_kreiranja_do":
+                    query_string += f"AND tema.datum_kreiranja <= %({keys})s "
+                elif keys == "datum_kreiranja_od":
+                    query_string += f"AND tema.datum_kreiranja >= %({keys})s "
+                elif keys == "pod_forum_id":
+                    query_string += f" WHERE pod_forum.naslov LIKE '%%' %({keys})s '%%' "
+                else:
+                    query_string += f"AND {keys} LIKE '%%' %({keys})s '%%' "
+            count+=1
+
+    cursor.execute(query_string,pretraga)
+    teme = cursor.fetchall()
+
+    vidljive_teme = []
+
+    for tema in teme:
+        if tema['obrisan'] == 0:
+            vidljive_teme.append(tema)
+
+    return jsonify(vidljive_teme),201
