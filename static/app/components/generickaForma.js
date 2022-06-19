@@ -48,7 +48,9 @@ export default{
 
         <template v-if="m['type'] === 'select'">        
             <select class="form-control" v-model="podaci[m['key']]" required>
-                <option v-for="row in rows" :value="row[m['id']]">{{row[m['value']]}}</option>
+                <template v-for="row in rows">
+                <option v-if="row['obrisan'] == 0" :value="row[m['id']]">{{row[m['value']]}}</option>
+                </template>
             </select>
         </template>
 
@@ -77,7 +79,9 @@ export default{
 
         <template v-if="m['type'] === 'select'">        
             <select class="form-control" v-model="podaci[m['key']]" required>
-                <option v-for="row in rows" :value="row[m['id']]">{{row[m['value']]}}</option>
+                <template v-for="row in rows">  
+                    <option v-if="row['obrisan'] == 0" :value="row[m['id']]">{{row[m['value']]}}</option>
+                </template>
             </select>
         </template>
 

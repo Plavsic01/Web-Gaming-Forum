@@ -38,7 +38,7 @@ def kreiraj_korisnik_privilegiju():
         db.commit()
         return jsonify(None),201
     except:
-        return jsonify(None),404
+        return jsonify(None),403
 
 @korisnik_privilegija_blueprint.route('/<int:id>',methods=['PUT'])
 @jwt_required(locations=['headers'])
