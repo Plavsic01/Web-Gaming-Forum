@@ -66,3 +66,26 @@ def obrisi_privilegiju(privilegija_id):
         return jsonify(None), 404
 
     return jsonify(None), 200 
+
+
+@privilegija_blueprint.route('/pretraga',methods=["POST"])
+@jwt_required(locations=['headers'])
+def pretraga():
+    db = mysql.get_db()
+    cursor = db.cursor()
+
+    pretraga = request.json
+    if len(pretraga) == 0:
+        cursor.execute("SELECT * FROM privilegija")
+    else:    
+        cursor.execute("SELECT * FROM privilegija WHERE tip_privilegije LIKE '%%' %(tip_privilegije)s '%%'",pretraga)
+        
+    privilegije = cursor.fetchall()
+
+    vidljive_privilegije = []
+
+    for privilegija in privilegije:
+        if privilegija['obrisan'] == 0:
+            vidljive_privilegije.append(privilegija)
+
+    return jsonify(vidljive_privilegije),201

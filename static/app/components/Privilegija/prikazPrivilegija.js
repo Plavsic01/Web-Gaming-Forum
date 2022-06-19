@@ -35,7 +35,6 @@ export default{
         }
         ,
         onAction(event){
-            console.log(event);
             if(event.action == "izmeni"){
                 this.$router.push({name:'forma_privilegija',params:{id:`${event.row.privilegija_id}`}});
                 

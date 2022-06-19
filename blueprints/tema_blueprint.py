@@ -103,8 +103,6 @@ def pretraga():
                     query_string += f" WHERE tema.datum_kreiranja >= %({keys})s "
                 elif keys == "datum_kreiranja_do":
                     query_string += f" WHERE tema.datum_kreiranja <= %({keys})s "
-                elif keys == "pod_forum_id":
-                    query_string += f" WHERE pod_forum.naslov LIKE '%%' %({keys})s '%%' "
                 else:
                     query_string += f" WHERE {keys} LIKE '%%' %({keys})s '%%' "
                 
@@ -113,8 +111,6 @@ def pretraga():
                     query_string += f"AND tema.datum_kreiranja <= %({keys})s "
                 elif keys == "datum_kreiranja_od":
                     query_string += f"AND tema.datum_kreiranja >= %({keys})s "
-                elif keys == "pod_forum_id":
-                    query_string += f" WHERE pod_forum.naslov LIKE '%%' %({keys})s '%%' "
                 else:
                     query_string += f"AND {keys} LIKE '%%' %({keys})s '%%' "
             count+=1

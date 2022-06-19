@@ -35,11 +35,21 @@ import formaKorisnikPrivilegija from "./components/KorisnikPrivilegija/formaKori
 
 import pretragaPodForum from "./components/PodForum/pretragaPodForum.js";
 import pretragaTema from "./components/Tema/pretragaTema.js";
+import pretragaKorisnik from "./components/Korisnik/pretragaKorisnik.js";
+import pretragaPrivilegija from "./components/Privilegija/pretragaPrivilegija.js";
+import pretragaKorisnikPrivilegija from "./components/KorisnikPrivilegija/pretragaKorisnikPrivilegija.js";
+import pretragaObjava from "./components/Objava/pretragaObjava.js";
+import pretragaKomentar from "./components/Komentar/pretragaKomentar.js";
 
 const routes = [
     {path:'/',component:pocetnaStranica,name:"pocetna_stranica"},
     {path:'/prijava',component:login,name:"prijava_forma"},
     {path:'/registracija',component:registracija,name:"registracija_forma"},
+    {path:'/pod-forumi',component:prikazPodForum},
+    {path:'/korisnici',component:prikazKorisnika},
+    {path:'/korisnik',component:prikazTrenutnogKorisnika},
+
+
     {path:'/forma-korisnik',component:formaKorisnika},
     {path:'/forma-teme',component:formaTema},
     {path:'/forma-objave',component:formaObjava},
@@ -47,18 +57,16 @@ const routes = [
     {path:'/forma-podforumi',component:formaPodForum},
     {path:'/forma-privilegija',component:formaPrivilegija},
     {path:'/forma-korisnik-privilegija',component:formaKorisnikPrivilegija},
+
+
     {path:'/pretraga-pod-forumi',component:pretragaPodForum},
     {path:'/pretraga-teme',component:pretragaTema},
+    {path:'/pretraga-korisnici',component:pretragaKorisnik},
+    {path:'/pretraga-privilegije',component:pretragaPrivilegija},
+    {path:'/pretraga-korisnici-privilegije',component:pretragaKorisnikPrivilegija},
+    {path:'/pretraga-objave',component:pretragaObjava},
+    {path:'/pretraga-komentari',component:pretragaKomentar},
     
-    
-
-
-    {path:'/pod-forumi',component:prikazPodForum},
-    {path:'/korisnici',component:prikazKorisnika},
-    {path:'/korisnik',component:prikazTrenutnogKorisnika},
-    
-
-
 
     {path:'/forma-korisnik/:id',component:formaKorisnika,name:"forma_korisnika"},
     {path:'/forma-pod-forum/:id',component:formaPodForum,name:"forma_podforum"},
@@ -124,6 +132,11 @@ app.component("forma-privilegija",formaPrivilegija);
 
 app.component("pretraga-pod-foum",pretragaPodForum);
 app.component("pretraga-tema",pretragaTema);
+app.component("pretraga-korisnik",pretragaKorisnik);
+app.component("pretraga-privilegija",pretragaPrivilegija);
+app.component("pretraga-korisnik-privilegija",pretragaKorisnikPrivilegija);
+app.component("pretraga-objava",pretragaObjava);
+app.component("pretraga-komentar",pretragaKomentar);
 
 
 app.component("prikaz-korisnik-privilegija",prikazKorisnikPrivilegija);

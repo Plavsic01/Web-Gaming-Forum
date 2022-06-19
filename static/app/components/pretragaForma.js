@@ -1,19 +1,19 @@
 import service from "../services/service.js"
 
 export default{
-    props:["metadata","api_path","decodedToken"],
+    props:["metadata","api_path","decodedToken","dozvoljenaPrava"],
     data(){
         return {
             podaci:{},
             pronadjena_pretraga:false,
             podaci_pretrage:[],
-            token_postoji:false
+            pronadjen_pristup:false
         }
     },
     created(){
         if(this.decodedToken){
-            this.token_postoji = true;
-        }
+            this.pronadjen_pristup = this.dozvoljenaPrava.some(r=> this.decodedToken.prava_pristupa.includes(r))
+            }
     },
     methods:{
         pretrazi(){
@@ -28,7 +28,7 @@ export default{
     <br>
     <div style="width:30%;margin:auto;">
     <form v-on:submit.prevent="pretrazi()">
-    <template v-if="token_postoji">
+    <template v-if="pronadjen_pristup">
     <div v-for="m in metadata.form_columns">
         <label>{{m['title']}}</label>    
         <template v-if="m['type'] != 'textarea'">
@@ -47,7 +47,6 @@ export default{
 
 
 <template v-if="pronadjena_pretraga">
-    <template v-if="token_postoji">
     <table class="table table-bordered">
     <thead>
         <tr>
@@ -67,7 +66,6 @@ export default{
         </tr>
     </tbody>
     </table>
-    </template>
 </template>
     `
 

@@ -47,8 +47,18 @@ export default{
                   Pretraga
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <template v-for="prava in decodedToken.prava_pristupa">
+                    <li v-if="prava == 'administrator'">  
+                    <li><router-link class="nav-link" to="/pretraga-korisnici">Korisnici</router-link></li>  
+                    <li><router-link class="nav-link" to="/pretraga-privilegije">Privilegije</router-link></li>  
+                    <li><router-link class="nav-link" to="/pretraga-korisnici-privilegije">Korisnici Privilegije</router-link></li>  
+                    </li>
+                  </template>               
                   <li><router-link class="nav-link" to="/pretraga-pod-forumi">Pod Forumi</router-link></li>
                   <li><router-link class="nav-link" to="/pretraga-teme">Teme</router-link></li>
+                  <li><router-link class="nav-link" to="/pretraga-objave">Objave</router-link></li>
+                  <li><router-link class="nav-link" to="/pretraga-komentari">Komentari</router-link></li>
+                  
                 </ul>
               </li>
 
@@ -60,8 +70,6 @@ export default{
                 <router-link class="nav-link" to="/korisnik">Moj Profil</router-link>
             </li>
             </template>
-
-            
             
               <li class="nav-item">
                 <a class="nav-link" @click="odjava">Odjava</a>

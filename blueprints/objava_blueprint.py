@@ -88,3 +88,49 @@ def obrisi_objavu(objava_id):
         return jsonify(None), 404
 
     return jsonify(None), 200
+
+
+
+@objava_blueprint.route('/pretraga',methods=["POST"])
+@jwt_required(locations=['headers'])
+def pretraga():
+    db = mysql.get_db()
+    cursor = db.cursor()
+
+    query_string = "SELECT objava.objava_id,objava.opis,objava.datum_kreiranja,objava.naslov,\
+            objava.obrisan,objava.korisnik_id,korisnik.korisnicko_ime,tema.naslov \
+            FROM objava INNER JOIN korisnik ON objava.korisnik_id = korisnik.korisnik_id\
+            INNER JOIN tema ON objava.tema_id = tema.tema_id"
+
+    pretraga = request.json
+    count = 0
+    for keys,values in pretraga.items():
+        if values != '':
+            if count == 0:
+                if keys == "datum_kreiranja_od":
+                    query_string += f" WHERE objava.datum_kreiranja >= %({keys})s "
+                elif keys == "datum_kreiranja_do":
+                    query_string += f" WHERE objava.datum_kreiranja <= %({keys})s "
+                else:
+                    query_string += f" WHERE {keys} LIKE '%%' %({keys})s '%%' "
+                
+            else:
+                if keys == "datum_kreiranja_do":
+                    query_string += f"AND objava.datum_kreiranja <= %({keys})s "
+                elif keys == "datum_kreiranja_od":
+                    query_string += f"AND objava.datum_kreiranja >= %({keys})s "
+                else:
+                    query_string += f"AND {keys} LIKE '%%' %({keys})s '%%' "
+            count+=1
+
+    cursor.execute(query_string,pretraga)
+    pod_forumi = cursor.fetchall()
+
+    vidljivi_pod_forumi = []
+
+    for pod_forum in pod_forumi:
+        if pod_forum['obrisan'] == 0:
+            vidljivi_pod_forumi.append(pod_forum)
+    
+
+    return jsonify(vidljivi_pod_forumi),201

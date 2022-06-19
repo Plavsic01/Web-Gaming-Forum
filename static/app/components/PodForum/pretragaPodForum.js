@@ -2,6 +2,7 @@ export default{
     data(){
         return {
             api_path:"/api/pod-forum/pretraga",
+            dozvoljenaPrava:["administrator","korisnik"],
             decodedToken:((localStorage.getItem('token')) ? JSON.parse(atob(localStorage.getItem('token').split(".")[1]))['sub']:null),
             metadata:{
                 form_columns:[
@@ -22,7 +23,7 @@ export default{
     template:`
         <br>
         <h2 style="text-align:center">Pretrazi Pod-Forum</h2>
-        <pretraga-forma :api_path="api_path" v-bind:decodedToken="decodedToken" :metadata="metadata"></pretraga-forma>
+        <pretraga-forma :api_path="api_path" v-bind:dozvoljenaPrava="dozvoljenaPrava" v-bind:decodedToken="decodedToken" :metadata="metadata"></pretraga-forma>
         
     `
 }

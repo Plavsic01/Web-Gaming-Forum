@@ -34,7 +34,7 @@ export default{
         <div class="card shadow-2-strong" style="border-radius: 1rem;">
           <div class="card-body p-5 text-center">
 
-            <h3 class="mb-5">Prijava</h3>
+            <h3 class="mb-5">Registracija</h3>
 
             <form v-on:submit.prevent="registracija()">
 

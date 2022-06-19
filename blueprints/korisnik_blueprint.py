@@ -71,3 +71,43 @@ def obrisi_korisnika(korisnik_id):
 
     return jsonify(None), 200 
 
+
+@korisnik_blueprint.route('/pretraga',methods=["POST"])
+@jwt_required(locations=['headers'])
+def pretraga():
+    db = mysql.get_db()
+    cursor = db.cursor()
+
+    query_string = "SELECT * FROM korisnik"
+
+    pretraga = request.json
+    count = 0
+    for keys,values in pretraga.items():
+        if values != '':
+            if count == 0:
+                if keys == "datum_kreiranja_od":
+                    query_string += f" WHERE datum_kreiranja >= %({keys})s "
+                elif keys == "datum_kreiranja_do":
+                    query_string += f" WHERE datum_kreiranja <= %({keys})s "
+                else:
+                    query_string += f" WHERE {keys} LIKE '%%' %({keys})s '%%' "
+                
+            else:
+                if keys == "datum_kreiranja_do":
+                    query_string += f"AND datum_kreiranja <= %({keys})s "
+                elif keys == "datum_kreiranja_od":
+                    query_string += f"AND datum_kreiranja >= %({keys})s "                
+                else:
+                    query_string += f"AND {keys} LIKE '%%' %({keys})s '%%' "
+            count+=1
+
+    cursor.execute(query_string,pretraga)
+    korisnici = cursor.fetchall()
+
+    vidljivi_korisnici = []
+
+    for korisnik in korisnici:
+        if korisnik['obrisan'] == 0:
+            vidljivi_korisnici.append(korisnik)
+
+    return jsonify(vidljivi_korisnici),201

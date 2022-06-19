@@ -1,8 +1,5 @@
 from flask import Blueprint, request,jsonify
-from flask_jwt_extended import jwt_required
-from flask_jwt_extended import get_jwt
 from flask_jwt_extended import create_access_token
-import flask_jwt_extended
 from utils.db import mysql
 import datetime
 
@@ -72,4 +69,3 @@ def prijava():
         return jsonify(access_token=access_token),201
 
     return jsonify("Neuspesna prijava"),401
-
