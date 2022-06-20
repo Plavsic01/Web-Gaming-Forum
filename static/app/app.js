@@ -98,8 +98,6 @@ const app = Vue.createApp({
 
 app.use(router);
 
-
-
 app.component("pocetna-stranica",pocetnaStranica);
 
 app.component("prikaz-tema",prikazTema);
@@ -129,7 +127,10 @@ app.component("forma-komentar",formaKomentar);
 app.component("prikaz-privilegija",prikazPrivilegija);
 app.component("forma-privilegija",formaPrivilegija);
 
+app.component("prikaz-korisnik-privilegija",prikazKorisnikPrivilegija);
+app.component("forma-korisnik-privilegija",formaKorisnikPrivilegija);
 
+app.component("prikaz-trenutnog-korisnika",prikazTrenutnogKorisnika);
 app.component("pretraga-pod-foum",pretragaPodForum);
 app.component("pretraga-tema",pretragaTema);
 app.component("pretraga-korisnik",pretragaKorisnik);
@@ -137,13 +138,6 @@ app.component("pretraga-privilegija",pretragaPrivilegija);
 app.component("pretraga-korisnik-privilegija",pretragaKorisnikPrivilegija);
 app.component("pretraga-objava",pretragaObjava);
 app.component("pretraga-komentar",pretragaKomentar);
-
-
-app.component("prikaz-korisnik-privilegija",prikazKorisnikPrivilegija);
-app.component("forma-korisnik-privilegija",formaKorisnikPrivilegija);
-
-app.component("prikaz-trenutnog-korisnika",prikazTrenutnogKorisnika);
-
 
 
 app.component("login",login);

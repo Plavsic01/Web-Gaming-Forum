@@ -34,11 +34,18 @@ def kreiraj_korisnik_privilegiju():
     cursor = db.cursor()
     form_data = request.json
     try:
-        cursor.execute("INSERT INTO korisnik_privilegije (korisnik_id,privilegija_id) VALUES (%(korisnik_id)s,%(privilegija_id)s);",form_data)
-        db.commit()
-        return jsonify(None),201
+        cursor.execute("SELECT korisnik.obrisan FROM korisnik WHERE korisnik_id = %(korisnik_id)s",form_data)
+        kor_obrisan = cursor.fetchone()
+        cursor.execute("SELECT privilegija.obrisan FROM privilegija WHERE privilegija_id = %(privilegija_id)s",form_data)
+        priv_obrisan = cursor.fetchone()
+        if kor_obrisan['obrisan'] == 0 and priv_obrisan['obrisan'] == 0:
+            cursor.execute("INSERT INTO korisnik_privilegije (korisnik_id,privilegija_id) VALUES (%(korisnik_id)s,%(privilegija_id)s);",form_data)
+            db.commit()
+            return jsonify(None),201
+        else:
+            return jsonify(None),404    
     except:
-        return jsonify(None),403
+        return jsonify(None),404
 
 @korisnik_privilegija_blueprint.route('/<int:id>',methods=['PUT'])
 @jwt_required(locations=['headers'])
@@ -48,11 +55,18 @@ def izmeni_korisnik_privilegija(id):
     form_data = dict(request.json)
     form_data['id'] = id
     try:
-        modified = cursor.execute("UPDATE korisnik_privilegije SET korisnik_id = %(korisnik_id)s,privilegija_id = %(privilegija_id)s WHERE (id = %(id)s);",form_data)
-        db.commit()
-        if modified == 0:
+        cursor.execute("SELECT korisnik.obrisan FROM korisnik WHERE korisnik_id = %(korisnik_id)s",form_data)
+        kor_obrisan = cursor.fetchone()
+        cursor.execute("SELECT privilegija.obrisan FROM privilegija WHERE privilegija_id = %(privilegija_id)s",form_data)
+        priv_obrisan = cursor.fetchone()
+        if kor_obrisan['obrisan'] == 0 and priv_obrisan['obrisan'] == 0:
+            modified = cursor.execute("UPDATE korisnik_privilegije SET korisnik_id = %(korisnik_id)s,privilegija_id = %(privilegija_id)s WHERE (id = %(id)s);",form_data)
+            db.commit()
+            if modified == 0:
+                return jsonify(None),404
+            return jsonify(form_data),200
+        else:
             return jsonify(None),404
-        return jsonify(form_data),200
     except:
         return jsonify(None),404
 

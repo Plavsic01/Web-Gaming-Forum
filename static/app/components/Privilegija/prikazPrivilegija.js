@@ -46,8 +46,9 @@ export default{
     },
     template:`
     <br>
+    <div style="text-align:center;width:80%;margin:auto;">
+    <h2>Privilegije</h2>
     <br>
-    <div style="width:80%;margin:auto;">
     <genericka-tabela @action-event="onAction" v-bind:dozvoljeneIzmene="dozvoljeneIzmene" v-bind:dozvoljenaPrava="dozvoljenaPrava" v-bind:rows="privilegije" v-bind:decodedToken="decodedToken" v-bind:metadata="metadata"></genericka-tabela>   
     </div>
     `
