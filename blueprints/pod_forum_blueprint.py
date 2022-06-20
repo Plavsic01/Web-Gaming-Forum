@@ -88,10 +88,6 @@ def obrisi_pod_forum(pod_forum_id):
     
     db.commit()
 
-    
-
-    
-
     if modified == 0:
         return jsonify(None), 404
 
