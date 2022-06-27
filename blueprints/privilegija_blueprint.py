@@ -33,9 +33,12 @@ def kreiraj_privilegiju():
     db = mysql.get_db()
     cursor = db.cursor()
     form_data = request.json
-    cursor.execute("INSERT INTO privilegija (tip_privilegije) VALUES (%(tip_privilegije)s);",form_data)
-    db.commit()
-    return jsonify(None),201
+    try:
+        cursor.execute("INSERT INTO privilegija (tip_privilegije) VALUES (%(tip_privilegije)s);",form_data)
+        db.commit()
+        return jsonify(None),201
+    except:
+        return jsonify(None),403
 
 @privilegija_blueprint.route('/<int:privilegija_id>',methods=['PUT'])
 @jwt_required(locations=['headers'])

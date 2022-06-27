@@ -49,9 +49,13 @@ def kreiraj_temu():
     str_now = now.date().isoformat()
     form_data['datum_kreiranja'] = str_now
     form_data['korisnik_id'] = cur_user['korisnik_id']
-    cursor.execute("INSERT INTO tema (naslov,datum_kreiranja,korisnik_id,pod_forum_id) VALUES (%(naslov)s,%(datum_kreiranja)s,%(korisnik_id)s,%(pod_forum_id)s);",form_data)
-    db.commit()
-    return jsonify(None),201
+    
+    try:
+        cursor.execute("INSERT INTO tema (naslov,datum_kreiranja,korisnik_id,pod_forum_id) VALUES (%(naslov)s,%(datum_kreiranja)s,%(korisnik_id)s,%(pod_forum_id)s);",form_data)
+        db.commit()
+        return jsonify(None),201
+    except:
+        return jsonify(None),403
 
 
 

@@ -38,7 +38,7 @@ def registracija():
 
         return jsonify(None),201
     
-    return jsonify(None),401
+    return jsonify(None),403
 
 
 @autentikacija_blueprint.route("/prijava",methods=["POST"])

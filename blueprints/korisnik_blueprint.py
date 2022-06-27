@@ -37,9 +37,12 @@ def kreiraj_korisnika():
     now = datetime.datetime.now()
     str_now = now.date().isoformat()
     form_data['datum_kreiranja'] = str_now
-    cursor.execute("INSERT INTO korisnik (korisnicko_ime,email,lozinka,datum_kreiranja) VALUES (%(korisnicko_ime)s,%(email)s,%(lozinka)s,%(datum_kreiranja)s);",form_data)
-    db.commit()
-    return jsonify(None),201
+    try:
+        cursor.execute("INSERT INTO korisnik (korisnicko_ime,email,lozinka,datum_kreiranja) VALUES (%(korisnicko_ime)s,%(email)s,%(lozinka)s,%(datum_kreiranja)s);",form_data)
+        db.commit()
+        return jsonify(None),201
+    except:
+        return jsonify(None),403
 
 @korisnik_blueprint.route('/<int:korisnik_id>',methods=["PUT"])
 @jwt_required(locations=['headers'])
