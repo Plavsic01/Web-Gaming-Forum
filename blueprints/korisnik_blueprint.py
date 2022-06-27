@@ -110,4 +110,10 @@ def pretraga():
         if korisnik['obrisan'] == 0:
             vidljivi_korisnici.append(korisnik)
 
-    return jsonify(vidljivi_korisnici),201
+
+    if len(vidljivi_korisnici) > 0:
+        return jsonify(vidljivi_korisnici),201
+    
+    else:
+        return jsonify(None),404
+

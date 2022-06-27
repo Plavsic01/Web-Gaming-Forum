@@ -88,4 +88,9 @@ def pretraga():
         if privilegija['obrisan'] == 0:
             vidljive_privilegije.append(privilegija)
 
-    return jsonify(vidljive_privilegije),201
+
+    if len(vidljive_privilegije) > 0:
+        return jsonify(vidljive_privilegije),201
+
+    else:
+        return jsonify(None),404

@@ -123,13 +123,17 @@ def pretraga():
             count+=1
 
     cursor.execute(query_string,pretraga)
-    pod_forumi = cursor.fetchall()
+    komentari = cursor.fetchall()
 
-    vidljivi_pod_forumi = []
+    vidljivi_komentari = []
 
-    for pod_forum in pod_forumi:
-        if pod_forum['obrisan'] == 0:
-            vidljivi_pod_forumi.append(pod_forum)
+    for komentar in komentari:
+        if komentar['obrisan'] == 0:
+            vidljivi_komentari.append(komentar)
     
 
-    return jsonify(vidljivi_pod_forumi),201
+    if len(vidljivi_komentari) > 0:
+        return jsonify(vidljivi_komentari),201
+
+    else:
+        return jsonify(None),404

@@ -126,13 +126,19 @@ def pretraga():
             count+=1
 
     cursor.execute(query_string,pretraga)
-    pod_forumi = cursor.fetchall()
+    objave = cursor.fetchall()
 
-    vidljivi_pod_forumi = []
+    vidljive_objave = []
 
-    for pod_forum in pod_forumi:
-        if pod_forum['obrisan'] == 0:
-            vidljivi_pod_forumi.append(pod_forum)
+    for objava in objave:
+        if objava['obrisan'] == 0:
+            vidljive_objave.append(objava)
     
 
-    return jsonify(vidljivi_pod_forumi),201
+    if len(vidljive_objave) > 0:
+        return jsonify(vidljive_objave),201
+
+    else:
+        return jsonify(None),404
+
+    

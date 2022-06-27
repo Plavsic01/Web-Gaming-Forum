@@ -112,12 +112,17 @@ def pretraga():
             count+=1
 
     cursor.execute(query_string,pretraga)
-    korisnici = cursor.fetchall()
+    korisnici_privilegije = cursor.fetchall()
 
-    vidljivi_korisnici = []
+    vidljivi_korisnici_privilegije = []
 
-    for korisnik in korisnici:
-        if korisnik['obrisan'] == 0:
-            vidljivi_korisnici.append(korisnik)
+    for korisnik_privilegija in korisnici_privilegije:
+        if korisnik_privilegija['obrisan'] == 0:
+            vidljivi_korisnici_privilegije.append(korisnik_privilegija)
 
-    return jsonify(vidljivi_korisnici),201
+
+    if len(vidljivi_korisnici_privilegije) > 0:
+        return jsonify(vidljivi_korisnici_privilegije),201
+
+    else:
+        return jsonify(None),404
