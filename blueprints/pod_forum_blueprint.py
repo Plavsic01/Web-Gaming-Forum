@@ -74,17 +74,25 @@ def obrisi_pod_forum(pod_forum_id):
     cursor.execute("SELECT tema_id FROM tema WHERE pod_forum_id = %(pod_forum_id)s",data)
     tema = cursor.fetchone()
 
-    data['tema_id'] = tema['tema_id']
+    if tema:
+        data['tema_id'] = tema['tema_id']
+        cursor.execute("UPDATE tema SET obrisan = %(obrisan)s WHERE pod_forum_id = %(pod_forum_id)s;",data)
 
-    cursor.execute("SELECT objava_id FROM objava WHERE tema_id = %(tema_id)s",data)
-    objava = cursor.fetchone()
+        cursor.execute("SELECT objava_id FROM objava WHERE tema_id = %(tema_id)s",data)
+        objava = cursor.fetchone()
 
-    data['objava_id'] = objava['objava_id']
+        if objava:
+            data['objava_id'] = objava['objava_id']
+            cursor.execute("UPDATE objava SET obrisan = %(obrisan)s WHERE tema_id = %(tema_id)s;",data)
+
+            cursor.execute("SELECT objava_id FROM komentar WHERE objava_id = %(objava_id)s",data)
+            komentar = cursor.fetchone()
+
+            if komentar:
+                cursor.execute("UPDATE komentar SET obrisan = %(obrisan)s WHERE objava_id = %(objava_id)s;",data)
+            
 
     modified = cursor.execute("UPDATE pod_forum SET obrisan = %(obrisan)s WHERE pod_forum_id = %(pod_forum_id)s;",data)
-    cursor.execute("UPDATE tema SET obrisan = %(obrisan)s WHERE pod_forum_id = %(pod_forum_id)s;",data)
-    cursor.execute("UPDATE objava SET obrisan = %(obrisan)s WHERE tema_id = %(tema_id)s;",data)
-    cursor.execute("UPDATE komentar SET obrisan = %(obrisan)s WHERE objava_id = %(objava_id)s;",data)
     
     db.commit()
 

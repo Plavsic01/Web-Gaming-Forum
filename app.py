@@ -1,3 +1,6 @@
+import mimetypes
+mimetypes.add_type('application/javascript','.js')
+mimetypes.add_type('text/css','.css')
 from flask import Flask
 from utils.db import mysql
 from datetime import timedelta

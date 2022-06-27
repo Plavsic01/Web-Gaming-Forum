@@ -81,6 +81,7 @@ def obrisi_objavu(objava_id):
     data = {}
     data['obrisan'] = 1
     data['objava_id'] = objava_id
+
     cursor.execute("UPDATE komentar SET obrisan = %(obrisan)s WHERE objava_id = %(objava_id)s;",data)
     modified = cursor.execute("UPDATE objava SET obrisan = %(obrisan)s WHERE (objava_id = %(objava_id)s);",data)
     db.commit()

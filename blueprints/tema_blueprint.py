@@ -81,12 +81,12 @@ def obrisi_temu(tema_id):
     cursor.execute("SELECT objava_id FROM objava WHERE tema_id = %(tema_id)s",data)
     objava = cursor.fetchone()
 
-    data['objava_id'] = objava['objava_id']
-
+    if objava:
+        data['objava_id'] = objava['objava_id']
+        cursor.execute("UPDATE komentar SET obrisan = %(obrisan)s WHERE objava_id = %(objava_id)s;",data)
 
     cursor.execute("UPDATE objava SET obrisan = %(obrisan)s WHERE tema_id = %(tema_id)s;",data)
-    cursor.execute("UPDATE komentar SET obrisan = %(obrisan)s WHERE objava_id = %(objava_id)s;",data)
-    modified = cursor.execute("UPDATE tema SET obrisan = %(obrisan)s WHERE (tema_id = %(tema_id)s);",data)
+    modified = cursor.execute("UPDATE tema SET obrisan = %(obrisan)s WHERE tema_id = %(tema_id)s;",data)
     db.commit()
 
     if modified == 0:
