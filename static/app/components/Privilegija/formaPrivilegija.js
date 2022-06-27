@@ -17,7 +17,7 @@ export default{
     },
     template:`
         <br>
-        <h2 style="text-align:center">Kreiraj Komentar</h2>
+        <h2 style="text-align:center">Kreiraj Privilegiju</h2>
         <genericka-forma :rows="privilegije" v-bind:dozvoljenaPrava="dozvoljenaPrava" v-bind:decodedToken="decodedToken" :api_path="api_path" :metadata="metadata"></genericka-forma>
     `
 }
