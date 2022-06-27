@@ -135,10 +135,7 @@ def pretraga():
             vidljive_objave.append(objava)
     
 
-    if len(vidljive_objave) > 0:
-        return jsonify(vidljive_objave),201
+    return jsonify(vidljive_objave),201
 
-    else:
-        return jsonify(None),404
 
     

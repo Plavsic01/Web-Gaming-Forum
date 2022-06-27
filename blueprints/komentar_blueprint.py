@@ -132,8 +132,4 @@ def pretraga():
             vidljivi_komentari.append(komentar)
     
 
-    if len(vidljivi_komentari) > 0:
-        return jsonify(vidljivi_komentari),201
-
-    else:
-        return jsonify(None),404
+    return jsonify(vidljivi_komentari),201

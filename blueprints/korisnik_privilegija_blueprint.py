@@ -121,8 +121,4 @@ def pretraga():
             vidljivi_korisnici_privilegije.append(korisnik_privilegija)
 
 
-    if len(vidljivi_korisnici_privilegije) > 0:
-        return jsonify(vidljivi_korisnici_privilegije),201
-
-    else:
-        return jsonify(None),404
+    return jsonify(vidljivi_korisnici_privilegije),201

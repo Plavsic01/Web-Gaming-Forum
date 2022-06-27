@@ -141,7 +141,4 @@ def pretraga():
             vidljivi_pod_forumi.append(pod_forum)
     
 
-    if len(vidljivi_pod_forumi) > 0:
-        return jsonify(vidljivi_pod_forumi),201
-    else:
-        return jsonify(None),404
+    return jsonify(vidljivi_pod_forumi),201

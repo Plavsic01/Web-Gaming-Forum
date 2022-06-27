@@ -133,7 +133,6 @@ def pretraga():
         if tema['obrisan'] == 0:
             vidljive_teme.append(tema)
 
-    if len(vidljive_teme) > 0:
-        return jsonify(vidljive_teme),201
-    else:
-        return jsonify(None),404
+    
+    return jsonify(vidljive_teme),201
+    
