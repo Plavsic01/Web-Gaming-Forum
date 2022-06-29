@@ -6,7 +6,7 @@ export default{
             korisnik:[],
             decodedToken:((localStorage.getItem('token')) ? JSON.parse(atob(localStorage.getItem('token').split(".")[1]))['sub']:null),
             dozvoljenaPrava:["korisnik","administrator"],
-            dozvoljeneIzmene:[], // prazne izmene -> samo korisnik ciji je nalog menja!
+            dozvoljeneIzmene:[],
             metadata:{
                 columns:[
                     {"key":"korisnik_id","title":"Id"},

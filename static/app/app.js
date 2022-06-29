@@ -49,7 +49,6 @@ const routes = [
     {path:'/korisnici',component:prikazKorisnika},
     {path:'/korisnik',component:prikazTrenutnogKorisnika},
 
-
     {path:'/forma-korisnik',component:formaKorisnika},
     {path:'/forma-teme',component:formaTema},
     {path:'/forma-objave',component:formaObjava},
@@ -57,7 +56,6 @@ const routes = [
     {path:'/forma-podforumi',component:formaPodForum},
     {path:'/forma-privilegija',component:formaPrivilegija},
     {path:'/forma-korisnik-privilegija',component:formaKorisnikPrivilegija},
-
 
     {path:'/pretraga-pod-forumi',component:pretragaPodForum},
     {path:'/pretraga-teme',component:pretragaTema},
@@ -67,7 +65,6 @@ const routes = [
     {path:'/pretraga-objave',component:pretragaObjava},
     {path:'/pretraga-komentari',component:pretragaKomentar},
     
-
     {path:'/forma-korisnik/:id',component:formaKorisnika,name:"forma_korisnika"},
     {path:'/forma-pod-forum/:id',component:formaPodForum,name:"forma_podforum"},
     {path:'/forma-tema/:id',component:formaTema,name:"forma_tema"},
