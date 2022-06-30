@@ -62,20 +62,3 @@ export default{
     
     `
 }
-
-
-{/* <template v-if="prijavljen">
-        <p>Korisnik Uspesno Prijavljen!</p>
-    </template>
-
-    <template v-else>
-    <form v-on:submit.prevent="login()">
-    
-        <label>Korisnicko Ime</label>
-        <input v-model="podaci.korisnicko_ime" type=text>
-        <label>Lozinka</label>
-        <input v-model="podaci.lozinka" type=password>
-
-    <button class="btn btn-outline-success m-1" type="submit">Login</button>
-    </form>
-    </template> */}

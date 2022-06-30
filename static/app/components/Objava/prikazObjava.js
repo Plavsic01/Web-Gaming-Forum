@@ -47,17 +47,7 @@ export default{
                   this.objave = response.data;
               })
           })  
-        }
-        ,
-        // onAction(event){
-        //     if(event.action == "izmeni"){
-        //         this.$router.push({name:'forma_objava',params:{id:`${event.row.objava_id}`}});
-        //     }else if(event.action == "ukloni"){
-        //         this.ukloni(event.row.objava_id);
-        //     }else if(event.action == "prikazi"){
-        //     }
-        // }
-
+        },
         onAction(naziv,row){
             if(naziv == "izmeni"){
                 this.$router.push({name:'forma_objava',params:{id:`${row.objava_id}`}});

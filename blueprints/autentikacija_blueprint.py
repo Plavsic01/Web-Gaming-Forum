@@ -43,11 +43,12 @@ def registracija():
 
 @autentikacija_blueprint.route("/prijava",methods=["POST"])
 def prijava():
-    form_data = request.json
+    form_data = dict(request.json)
+    form_data['obrisan'] = 0
     db = mysql.get_db()
     cursor = db.cursor()
     cursor.execute("SELECT * FROM korisnik WHERE korisnicko_ime = %(korisnicko_ime)s \
-        AND lozinka = %(lozinka)s;",form_data)
+        AND lozinka = %(lozinka)s AND obrisan = %(obrisan)s;",form_data)
     korisnik = cursor.fetchone()
     if korisnik: 
         cursor.execute("SELECT privilegija.tip_privilegije FROM privilegija \

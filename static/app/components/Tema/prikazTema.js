@@ -4,11 +4,8 @@ export default{
     data(){
         return {
             teme:[],
-            // prava koja korisnik ima
-            decodedToken:((localStorage.getItem('token')) ? JSON.parse(atob(localStorage.getItem('token').split(".")[1]))['sub']:null),
-            // ko ima pravo da vidi ovaj sadrzaj
-            dozvoljenaPrava:["administrator","korisnik"], // 1 je admin  2 je korisnik 
-            // ko ima pravo da menja sadrzaj (izmena,brisanje)
+            decodedToken:((localStorage.getItem('token')) ? JSON.parse(atob(localStorage.getItem('token').split(".")[1]))['sub']:null), 
+            dozvoljenaPrava:["administrator","korisnik"],
             dozvoljeneIzmene:["administrator"],
             metadata:{
                 columns:[

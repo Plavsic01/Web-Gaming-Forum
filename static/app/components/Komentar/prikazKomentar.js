@@ -44,7 +44,6 @@ export default{
         }
         ,
         onAction(naziv,row){
-            console.log(row);
             if(naziv == "izmeni"){
                 this.$router.push({name:'forma_komentar',params:{id:`${row.komentar_id}`}});
                 
