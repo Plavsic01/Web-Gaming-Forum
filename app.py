@@ -15,7 +15,6 @@ from blueprints.komentar_blueprint import komentar_blueprint
 from blueprints.autentikacija_blueprint import autentikacija_blueprint
 
 
-
 app = Flask(__name__)
 jwt = JWTManager(app)
 
