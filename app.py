@@ -23,7 +23,7 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=24)
 app.config["MYSQL_DATABASE_HOST"] = "localhost"
 app.config["MYSQL_DATABASE_PORT"] = 3306
 app.config["MYSQL_DATABASE_USER"] = "root" 
-app.config["MYSQL_DATABASE_PASSWORD"] = "Najbolji3" 
+app.config["MYSQL_DATABASE_PASSWORD"] = "sifra" 
 app.config["MYSQL_DATABASE_DB"] = "forum"
 
 mysql.init_app(app)
